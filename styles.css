@@ -1,0 +1,222 @@
+/* Fonta disajikan lokal (Baloo 2 + Nunito, lisensi OFL, dari Google Fonts)
+   supaya situs berfungsi penuh tanpa koneksi eksternal. */
+@font-face {
+  font-family: "Baloo 2";
+  src: url("fonts/baloo2.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/nunito.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Dapur Hantu — tema dapur berhantu gaya Ghibli (CSS murni) */
+
+:root {
+  --night-1: #14102e;
+  --night-2: #241a4d;
+  --wood: #3a2a1e;
+  --lantern: #ffb347;
+  --lantern-soft: #f5a623;
+  --ghost: #f4f1ff;
+  --ink: #f4f1ff;
+  --ink-dim: #b9b3d9;
+  --card: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 179, 71, 0.25);
+  --good: #8fe3a8;
+  --missing: #e8a0a0;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 60%, #1a1238 100%);
+  min-height: 100vh;
+}
+
+/* --- Langit: bulan, kunang-kunang, kabut --- */
+.sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.moon {
+  position: absolute; top: 26px; right: 6vw;
+  width: 74px; height: 74px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffbe8, #f2d98c 70%);
+  box-shadow: 0 0 60px 18px rgba(242, 217, 140, 0.35);
+}
+.firefly {
+  position: absolute; width: 7px; height: 7px; border-radius: 50%;
+  background: #ffe9a8; box-shadow: 0 0 12px 3px rgba(255, 233, 168, 0.7);
+  animation: drift 9s ease-in-out infinite alternate, blink 3s ease-in-out infinite alternate;
+}
+.f1 { left: 12%; top: 30%; animation-delay: 0s; }
+.f2 { left: 28%; top: 62%; animation-delay: 1.2s; }
+.f3 { left: 55%; top: 22%; animation-delay: 0.6s; }
+.f4 { left: 78%; top: 55%; animation-delay: 2s; }
+.f5 { left: 88%; top: 78%; animation-delay: 1.6s; }
+@keyframes drift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(26px, -34px); }
+}
+@keyframes blink {
+  from { opacity: 0.25; }
+  to { opacity: 1; }
+}
+.fog {
+  position: absolute; left: -20%; width: 140%; height: 220px;
+  background: radial-gradient(ellipse at center, rgba(232, 230, 255, 0.09), transparent 65%);
+  animation: fogmove 60s linear infinite alternate;
+}
+.fog-a { bottom: 8%; }
+.fog-b { bottom: -4%; animation-duration: 85s; animation-direction: alternate-reverse; }
+@keyframes fogmove {
+  from { transform: translateX(-4%); }
+  to { transform: translateX(4%); }
+}
+
+/* --- Header --- */
+.site-header {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  max-width: 1020px; margin: 0 auto; padding: 34px 20px 10px;
+}
+.ghost { animation: floaty 4s ease-in-out infinite alternate; filter: drop-shadow(0 0 18px rgba(244, 241, 255, 0.35)); }
+@keyframes floaty {
+  from { transform: translateY(0); }
+  to { transform: translateY(-9px); }
+}
+.header-text { flex: 1; min-width: 220px; }
+h1 {
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  margin: 0; line-height: 1.05; color: var(--lantern);
+  text-shadow: 0 2px 24px rgba(255, 179, 71, 0.45);
+}
+.tagline { margin: 8px 0 0; color: var(--ink-dim); font-size: 1.05rem; max-width: 560px; }
+.sound-btn {
+  font: inherit; font-weight: 700; cursor: pointer;
+  background: rgba(255, 179, 71, 0.14); color: var(--lantern);
+  border: 1px solid var(--card-border); border-radius: 999px;
+  padding: 10px 16px;
+}
+.sound-btn[aria-pressed="true"] { background: var(--lantern); color: #241a4d; }
+
+/* --- Konten --- */
+main { position: relative; z-index: 1; max-width: 1020px; margin: 0 auto; padding: 10px 20px 30px; }
+h2 { font-family: "Baloo 2", "Nunito", sans-serif; font-size: 1.5rem; margin: 18px 0 4px; color: var(--ghost); }
+.hint { color: var(--ink-dim); margin: 0 0 14px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font: inherit; font-weight: 600; cursor: pointer;
+  background: rgba(255, 255, 255, 0.07); color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px;
+  padding: 7px 14px; text-transform: capitalize;
+}
+.chip:hover { border-color: var(--lantern); }
+.chip.on { background: var(--lantern); color: #241a4d; border-color: var(--lantern); }
+.reset-btn {
+  margin-top: 12px; font: inherit; cursor: pointer;
+  background: none; color: var(--ink-dim);
+  border: none; text-decoration: underline; padding: 4px 0;
+}
+.reset-btn:hover { color: var(--lantern); }
+
+.finder { margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
+#searchInput {
+  font: inherit; padding: 12px 16px; border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08); color: var(--ink);
+}
+#searchInput::placeholder { color: var(--ink-dim); }
+.categories { display: flex; flex-wrap: wrap; gap: 8px; }
+.cat {
+  font: inherit; font-weight: 700; cursor: pointer;
+  background: rgba(255, 255, 255, 0.07); color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 999px; padding: 7px 14px;
+}
+.cat.on { background: var(--ghost); color: #241a4d; border-color: var(--ghost); }
+
+.result-info { color: var(--ink-dim); margin: 18px 0 0; min-height: 1.2em; }
+
+.grid {
+  display: grid; gap: 16px; margin-top: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.card {
+  background: var(--card); border: 1px solid var(--card-border);
+  border-radius: 18px; padding: 18px; cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.card:hover, .card:focus-visible {
+  transform: translateY(-3px); border-color: var(--lantern);
+  box-shadow: 0 8px 30px rgba(255, 179, 71, 0.18);
+  outline: none;
+}
+.card-emoji { font-size: 2.4rem; line-height: 1; }
+.card h3 { font-family: "Baloo 2", "Nunito", sans-serif; margin: 10px 0 6px; font-size: 1.25rem; }
+.card p { margin: 0 0 12px; color: var(--ink-dim); font-size: 0.95rem; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.88rem; color: var(--ink-dim); }
+.match {
+  display: inline-block; margin-top: 12px; font-weight: 800; font-size: 0.9rem;
+  color: #241a4d; background: var(--good); border-radius: 999px; padding: 4px 10px;
+}
+.match.low { background: #ffd27d; }
+.spook { display: inline-block; margin-top: 12px; margin-left: 6px; font-size: 0.9rem; color: var(--lantern); }
+.empty-state { text-align: center; color: var(--ink-dim); margin: 30px 0; }
+
+/* --- Modal --- */
+.modal {
+  position: fixed; inset: 0; z-index: 10;
+  background: rgba(10, 6, 28, 0.78);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 40px 16px; overflow-y: auto;
+}
+.modal[hidden] { display: none; }
+.modal-card {
+  position: relative; width: 100%; max-width: 640px;
+  background: #241a4d; border: 1px solid var(--card-border);
+  border-radius: 20px; padding: 26px 26px 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.modal-close {
+  position: absolute; top: 12px; right: 12px;
+  font: inherit; cursor: pointer; width: 36px; height: 36px;
+  border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08); color: var(--ink);
+}
+.modal-card h2 { margin-top: 4px; }
+.modal-card h3 { font-family: "Baloo 2", "Nunito", sans-serif; margin: 20px 0 8px; color: var(--lantern); }
+.modal-card ol { margin: 0; padding-left: 22px; line-height: 1.65; }
+.modal-card ul { margin: 0; padding-left: 0; list-style: none; line-height: 1.7; }
+.ing-have { color: var(--good); }
+.ing-miss { color: var(--missing); }
+.tip-box {
+  margin-top: 20px; background: rgba(255, 179, 71, 0.12);
+  border: 1px dashed var(--lantern); border-radius: 12px; padding: 12px 14px;
+}
+.tip-box strong { color: var(--lantern); }
+
+.site-footer {
+  position: relative; z-index: 1; text-align: center;
+  color: var(--ink-dim); padding: 10px 20px 34px; font-size: 0.92rem;
+}
+.site-footer .tiny { font-size: 0.82rem; opacity: 0.8; }
+
+@media (max-width: 600px) {
+  .moon { width: 40px; height: 40px; top: 10px; right: 10px; }
+  .site-header { padding-top: 20px; }
+  h1 { font-size: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fog, .firefly, .ghost { animation: none; }
+}

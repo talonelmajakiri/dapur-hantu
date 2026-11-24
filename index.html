@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dapur Hantu — Resep Rumahan dari Dapur Berhantu</title>
+<meta name="description" content="Dapur Hantu: masukkan bahan yang ada di dapurmu, koki hantu akan menyarankan resep masakan rumahan Indonesia yang cocok. Proyek Kiroween 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 130'%3E%3Cpath d='M60 8 C30 8 14 34 14 62 L14 104 Q22 96 30 104 Q38 96 46 104 Q54 96 60 104 Q66 96 74 104 Q82 96 90 104 Q98 96 106 104 L106 62 C106 34 90 8 60 8 Z' fill='%23f4f1ff'/%3E%3Ccircle cx='44' cy='58' r='7' fill='%23241a4d'/%3E%3Ccircle cx='76' cy='58' r='7' fill='%23241a4d'/%3E%3Cellipse cx='60' cy='76' rx='6' ry='8' fill='%23241a4d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="sky" aria-hidden="true">
+  <div class="moon"></div>
+  <div class="firefly f1"></div>
+  <div class="firefly f2"></div>
+  <div class="firefly f3"></div>
+  <div class="firefly f4"></div>
+  <div class="firefly f5"></div>
+  <div class="fog fog-a"></div>
+  <div class="fog fog-b"></div>
+</div>
+
+<header class="site-header">
+  <div class="ghost" aria-hidden="true">
+    <svg viewBox="0 0 120 130" width="86" height="94">
+      <path d="M60 8 C30 8 14 34 14 62 L14 104 Q22 96 30 104 Q38 96 46 104 Q54 96 60 104 Q66 96 74 104 Q82 96 90 104 Q98 96 106 104 L106 62 C106 34 90 8 60 8 Z" fill="#f4f1ff"/>
+      <circle cx="44" cy="58" r="7" fill="#241a4d"/>
+      <circle cx="76" cy="58" r="7" fill="#241a4d"/>
+      <circle cx="46" cy="56" r="2.5" fill="#fff"/>
+      <circle cx="78" cy="56" r="2.5" fill="#fff"/>
+      <ellipse cx="60" cy="76" rx="6" ry="8" fill="#241a4d"/>
+      <path d="M22 30 Q60 -6 98 30 L92 40 Q60 14 28 40 Z" fill="#f5f1e6"/>
+      <rect x="34" y="26" width="52" height="9" rx="4" fill="#f5a623"/>
+    </svg>
+  </div>
+  <div class="header-text">
+    <h1>Dapur Hantu</h1>
+    <p class="tagline">Resep rumahan Indonesia dari dapur berhantu yang hangat — koki hantu siap membantumu memasak malam ini.</p>
+  </div>
+  <button id="soundBtn" class="sound-btn" type="button" aria-pressed="false">🔇 Suara Dapur</button>
+</header>
+
+<main>
+  <section class="pantry" aria-label="Bahan di dapurmu">
+    <h2>Ada bahan apa di dapurmu malam ini?</h2>
+    <p class="hint">Ketuk bahan yang kamu punya — koki hantu akan mengurutkan resep dari yang paling cocok.</p>
+    <div id="chips" class="chips"></div>
+    <button id="resetBtn" class="reset-btn" type="button">Bersihkan pilihan</button>
+  </section>
+
+  <section class="finder" aria-label="Cari resep">
+    <input id="searchInput" type="search" placeholder="Cari resep… (mis. nasi goreng, pancake)" aria-label="Cari resep">
+    <div id="categoryFilter" class="categories" role="group" aria-label="Filter kategori"></div>
+  </section>
+
+  <p id="resultInfo" class="result-info"></p>
+  <section id="grid" class="grid" aria-live="polite"></section>
+  <p id="emptyState" class="empty-state" hidden>Tidak ada resep yang cocok. Coba kata lain atau bersihkan pilihan bahannya.</p>
+</main>
+
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <button id="modalClose" class="modal-close" type="button" aria-label="Tutup">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>Dapur Hantu — proyek Kiroween 2026 · oleh Dapur Apple Chery · 12 resep asli dari e-book Dapur Apple Chery</p>
+  <p class="tiny">Dibangun sebagai situs statis (HTML/CSS/JS). Resep boleh dipakai untuk memasak di rumah.</p>
+</footer>
+
+<script src="recipes.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
